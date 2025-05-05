@@ -3,16 +3,18 @@ This is the backend for a Vendor Management System built with **Node.js**, **Exp
 
 ## 📁 Project Structure
 Vendor_Backend/
-├── controllers/
+├── docs/
 ├── middleware/
 ├── models/
 ├── routes/
-├── utils/
 ├── .env
 ├── package.json
-└── server.js
+└── index.js
 
-You can use Postman or similar tools to test these endpoints:
+You can use Postman tools to test these endpoints:
+And 
+or swagger - Run command nodemon index.js
+and in you Browser enter URl -: http://localhost:5000/api-docs/
 
 Login: POST /api/auth/login and signup  - 
 role-:
@@ -36,6 +38,7 @@ Make sure to include the JWT token in the Authorization header:
 - Sales analytics per vendor
 - Middleware for request validation
 - Secure API routing
+- Zod for request validation For Signup and Login
 
 ---
 
