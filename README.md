@@ -13,7 +13,7 @@ Vendor_Backend/
 
 You can use Postman tools to test these endpoints:
 And 
-or swagger - Run command nodemon index.js
+Swagger - Run command nodemon index.js
 and in you Browser enter URl -: http://localhost:5000/api-docs/
 
 Login: POST /api/auth/login and signup  - 
