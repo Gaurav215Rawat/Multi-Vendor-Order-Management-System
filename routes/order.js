@@ -6,6 +6,37 @@ const Order = require('../models/Order');
 const SubOrder = require('../models/SubOrder');
 const router = express.Router();
 
+
+/**
+ * @swagger
+ * /orders:
+ *   post:
+ *     summary: Create a new order
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               items:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     productId:
+ *                       type: string
+ *                     quantity:
+ *                       type: number
+ *     responses:
+ *       200:
+ *         description: Order successfully created
+ *       500:
+ *         description: Server error or insufficient stock
+ */
 router.post('/', isAuth, hasRole('customer'), async (req, res) => {
   const session = await mongoose.startSession();
   try {
@@ -43,6 +74,22 @@ router.post('/', isAuth, hasRole('customer'), async (req, res) => {
   }
 });
 
+
+
+/**
+ * @swagger
+ * /orders:
+ *   get:
+ *     summary: Get all orders (role-based)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of orders
+ *       500:
+ *         description: Error fetching orders
+ */
 // Get orders based on role
 router.get('/', isAuth, async (req, res) => {
     try {
@@ -68,6 +115,30 @@ router.get('/', isAuth, async (req, res) => {
   });
 
 
+
+
+
+  /**
+ * @swagger
+ * /orders/{userId}:
+ *   get:
+ *     summary: Get orders by user ID (admin only)
+ *     tags: [Orders]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User ID to filter orders
+ *     responses:
+ *       200:
+ *         description: Orders of a specific user
+ *       500:
+ *         description: Error fetching user orders
+ */
   // Get orders based on role or specific userId (admin only)
 router.get('/:userId', isAuth, async (req, res) => {
     try {
